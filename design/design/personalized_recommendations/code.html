@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Personalized Culinary Matches | Editorial Gastronomy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#5f5e5e",
+                        "primary-container": "#db313f",
+                        "on-surface-variant": "#5b403f",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#e2dfde",
+                        "surface-container-highest": "#e0e3e6",
+                        "outline-variant": "#e4bebc",
+                        "surface-container-high": "#e6e8eb",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed": "#281900",
+                        "on-surface": "#191c1e",
+                        "primary": "#b7122a",
+                        "background": "#f7f9fc",
+                        "on-tertiary-container": "#fffbff",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dadd",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#966d24",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "surface-container-low": "#f2f4f7",
+                        "surface": "#f7f9fc",
+                        "on-primary-fixed": "#410007",
+                        "surface-variant": "#e0e3e6",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-primary-container": "#fffbff",
+                        "tertiary": "#7a550b",
+                        "inverse-primary": "#ffb3b1",
+                        "tertiary-fixed-dim": "#f0be6d",
+                        "tertiary-fixed": "#ffdead",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fc",
+                        "outline": "#8f6f6e",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-container": "#636262",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#ffdad8",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eceef1",
+                        "surface-tint": "#bb162c",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-primary-fixed-variant": "#92001c",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #b7122a 0%, #db313f 100%);
+        }
+        .ai-glow-border {
+            border-left: 2px solid #f0be6d;
+        }
+        .glass-panel {
+            background: rgba(247, 249, 252, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .tonal-shift-bg-surface-container-low {
+            background-color: #f2f4f7;
+        }
+        .bg-shift-no-border {
+            background-color: #f2f4f7;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-6 md:px-12 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-zinc-900 dark:text-zinc-50 font-headline">Editorial Gastronomy</div>
+<div class="hidden md:flex items-center space-y-0 space-x-8 font-lexend tracking-tight">
+<a class="text-red-700 dark:text-red-500 font-semibold border-b-2 border-red-700 dark:border-red-500 pb-1" href="#">Discover</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-medium hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="#">Reservations</a>
+<a class="text-zinc-500 dark:text-zinc-400 font-medium hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="#">Collection</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-all duration-300 scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-red-700 dark:text-red-500" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-6 md:px-12 py-12">
+<!-- Hero Section & Back Action -->
+<header class="mb-16">
+<button class="flex items-center gap-2 text-primary font-semibold mb-6 group hover:opacity-80 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="arrow_back">arrow_back</span>
+<span class="font-label uppercase tracking-widest text-xs">Modify Preferences</span>
+</button>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-on-surface mb-4">
+                        Your Personalized <span class="text-primary">Culinary Matches</span>
+</h1>
+<p class="text-on-surface-variant text-lg md:text-xl font-light leading-relaxed">
+                        The Crimson Zest engine has analyzed your palate, history, and current mood to curate these exclusive experiences.
+                    </p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-low p-4 rounded-xl">
+<div class="w-12 h-12 rounded-full editorial-gradient flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="auto_awesome" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<div class="text-xs font-bold uppercase tracking-widest text-tertiary">AI Recommended</div>
+<div class="text-sm font-medium">98% Match Accuracy</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid Recommendations -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Main Featured Match -->
+<article class="md:col-span-8 group relative overflow-hidden bg-surface-container-lowest rounded-2xl shadow-sm transition-all duration-300 hover:shadow-xl">
+<div class="flex flex-col md:flex-row h-full">
+<div class="md:w-1/2 relative h-64 md:h-full overflow-hidden">
+<img alt="Interior of The Velvet Truffle" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="high-end restaurant interior with velvet seating, dimmed warm lighting, and a modern marble bar at twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0BZMd9bMmeBPeo2fTCSvxP1qRqpM6S_AFIMwNQULz-hvTlYNQn-SYu3YJvumejQNZKP5zCtJhoF2JHBxZfRxmsDfKMQ_PZ3w5tiVP1aTNmVep5DBvAxTu4FNwIIUIbmisRZRQj-9po_ubVMia9WdEnTWSsvhnwq3lrU6VuxiOaAqO8ACrc5Fk1nkJkG38O_BlQlvNQj0SGAqP6GAHtJwCautP20Yvul-RcpC5931v-f3KeA8gPMojWmHpB1gi04yi_dyde71b8KI"/>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                            #1 Selection
+                        </div>
+</div>
+<div class="md:w-1/2 p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<h2 class="font-headline text-3xl font-bold tracking-tight">The Velvet Truffle</h2>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold">4.9</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-medium text-on-surface-variant">Modern French</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-medium text-on-surface-variant">Great for Date Night</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-medium text-on-surface-variant">Rare Vintages</span>
+</div>
+<div class="ai-glow-border pl-4 mb-8">
+<div class="text-tertiary text-xs font-bold uppercase tracking-widest mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+                                    Why we picked this for you
+                                </div>
+<p class="text-on-surface text-sm leading-relaxed italic">
+                                    "Based on your recent interest in Burgundy wines and truffle-infused pairings, this establishment offers the exact depth of flavor you've been seeking."
+                                </p>
+</div>
+</div>
+<button class="editorial-gradient text-white w-full py-4 rounded-xl font-bold tracking-tight shadow-md hover:scale-[1.02] transition-transform">
+                            Book a Table
+                        </button>
+</div>
+</div>
+</article>
+<!-- Secondary Match 1 -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-lg transition-all">
+<div class="h-48 relative">
+<img alt="Platter of premium sushi" class="w-full h-full object-cover" data-alt="meticulously plated premium omakase sushi on a black slate platter with minimalist aesthetic and dramatic top-down lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn1DaIf9xcEVGVPh66XsMQtFmSUMat_FvtmekzXuaB3saQULW1O07RGEHr0hKtQvna_j5a-L3iUnRMlb7wEP9WKKC11Sb5MGNdlocJePjnqLxVjCpkYRE-BQbSwZd0puaeVIi6f_4YkvVkfUGxGJNn1prVFDOI4UofMulTPPG1r2VEUXs_4t9lXWTAwxmuhZk-0461h8mhkvAyyvotFpZBIOX1vJoksucVMyLzGE_xFCf1MG6nDdJS9DRw3pueExQBtQxfPOZAXTg"/>
+<div class="absolute bottom-4 right-4 glass-panel px-3 py-1 rounded-full text-xs font-bold text-on-surface">
+                        94% Match
+                    </div>
+</div>
+<div class="p-6 flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold">Sakura Omakase</h3>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-sm">4.8</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs font-medium text-primary">Best Sushi in Town</span>
+</div>
+<div class="ai-glow-border pl-3 mb-6">
+<div class="text-tertiary text-[10px] font-bold uppercase tracking-widest mb-1">AI Reasoning</div>
+<p class="text-xs text-on-surface-variant leading-tight">You prefer intimate seating and authentic Japanese techniques. Sakura matches your 'Quiet Luxury' filter.</p>
+</div>
+</div>
+<button class="bg-surface-container-high text-primary w-full py-3 rounded-xl font-bold text-sm hover:bg-surface-container-highest transition-colors">
+                        View Menu
+                    </button>
+</div>
+</article>
+<!-- Secondary Match 2 -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-lg transition-all">
+<div class="h-48 relative">
+<img alt="Rustic Italian Pasta" class="w-full h-full object-cover" data-alt="steaming plate of handmade artisanal pasta with rich tomato sauce and fresh basil in a rustic dimly lit trattoria setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKmfbKaDpsCAq1zw2Oy1Phx729TTXsGHW35MyWf3WcmGnBADf65_VSMa7BBiyp_i7G5GzUUHAQGiLIL79napA06rRMpzhtqYVdwb9GHZeSRqJylmTv8T3EYvl-jB_ov2XLxePmA3hFT5JowVeJS-0yCSURAbbr5whGTb18Ider3bR9uKXm5yxEo56Ztjl4kTViSWLTNlDCcDJtG6d-d9eoeFsaMjT-6V_QqMfP03HyqxNYYGUO-yj4f9qRYBst1tocbmHsEOR6Guk"/>
+<div class="absolute bottom-4 right-4 glass-panel px-3 py-1 rounded-full text-xs font-bold text-on-surface">
+                        91% Match
+                    </div>
+</div>
+<div class="p-6 flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold">Lumina Trattoria</h3>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-sm">4.7</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs font-medium text-primary">Organic Harvest</span>
+</div>
+<div class="ai-glow-border pl-3 mb-6">
+<div class="text-tertiary text-[10px] font-bold uppercase tracking-widest mb-1">AI Reasoning</div>
+<p class="text-xs text-on-surface-variant leading-tight">Matches your preference for farm-to-table sourcing and al fresco dining options.</p>
+</div>
+</div>
+<button class="bg-surface-container-high text-primary w-full py-3 rounded-xl font-bold text-sm hover:bg-surface-container-highest transition-colors">
+                        View Menu
+                    </button>
+</div>
+</article>
+<!-- Secondary Match 3 -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden flex flex-col hover:shadow-lg transition-all">
+<div class="h-48 relative">
+<img alt="Craft cocktail on a bar" class="w-full h-full object-cover" data-alt="close-up of a vibrant craft cocktail with a citrus peel garnish on a dark wooden bar with soft bokeh lights in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwT0LP6J6CcuaflgWNYW3yjuMKH1Wte_KGV6t4tyBMaVQ0-Bjp-ghI3sWFG3-OPGgzJHLN01RSm07LxUaiU5sWBH3FvDMjCowbPpzDtpJkxzUHmrJr2zhI5rdEM8AUK4BnYKnoHyo23BtltWCic7Fv_wYNoYMXMlg9zEvtBygBH4GTeC1ATozKDHiVZCkUdTacvOITSMZDg4WkEneT2Ft2EeGOaegdRgv47IeXe713cxBiRRYjNXDJ3_-cpHWLnlYHvrmPIlCBq-8"/>
+<div class="absolute bottom-4 right-4 glass-panel px-3 py-1 rounded-full text-xs font-bold text-on-surface">
+                        88% Match
+                    </div>
+</div>
+<div class="p-6 flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold">The Gilded Cask</h3>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-sm">4.6</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs font-medium text-primary">Mixology Masterclass</span>
+</div>
+<div class="ai-glow-border pl-3 mb-6">
+<div class="text-tertiary text-[10px] font-bold uppercase tracking-widest mb-1">AI Reasoning</div>
+<p class="text-xs text-on-surface-variant leading-tight">Since you enjoyed 'The Speak' last month, you'll appreciate this bar's focus on historical recipes.</p>
+</div>
+</div>
+<button class="bg-surface-container-high text-primary w-full py-3 rounded-xl font-bold text-sm hover:bg-surface-container-highest transition-colors">
+                        View Menu
+                    </button>
+</div>
+</article>
+<!-- Small List View Side Card -->
+<aside class="md:col-span-4 flex flex-col gap-4">
+<div class="bg-surface-container p-6 rounded-2xl">
+<h4 class="font-headline font-bold text-lg mb-4">Honorable Mentions</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden">
+<img alt="Restaurant thumb" class="w-full h-full object-cover" data-alt="close-up detail of artisanal food on a ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTDG2MdRJffNWrEYKU4f3MKRxgrsC9kvnNaRDufElps5daPkL4lHd99EXL9kcGScRkg_yAomvLNDKfqrkScuCjMUKYBrK9X70YE4YXEL5L56jb8BnpuGkhHQnxUUNj0Dx0Q-hRdEc6Gua_y4ypXMTTWfUKO-UFHbFDdhJrCpPRcC7pdtuZ5GZOzgnf4pAMLAn9UxXtRWb_tNCTkZKsE0r7370mX7q-nme2UxMqX5lWgfPnBFS-GP3GTETUM-h3PHq9dYBsdWdEO4g"/>
+</div>
+<div>
+<div class="text-sm font-bold">Oasis Rooftop</div>
+<div class="text-[10px] text-tertiary font-bold uppercase">Modern Thai</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden">
+<img alt="Restaurant thumb" class="w-full h-full object-cover" data-alt="blurred warm interior of a busy bistro at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuxTxBOwEhZEXPpN60f1kCB9X1OzB4jnTPsqrQo6lmva2q9QjEv9YYqLNq9ZRhQTeghmtbRvHS2PaQkLcf5-EaiRNEi5XPldrgxnva4sLsmnYTmjrME_JmEd7bL-Nn4e3E7kXu6Ds-b64ay0OqLfwZPu3AlO1VnsiAO2hyQToZzHugTF5gou7b-OfoDJflHBEj3LhNIhSc5wR--qykSb_8x8ExekcoevWjqEAmyRBD-OjUueu_sz_pUNy0H3q8ey4BnLyic4zreEA"/>
+</div>
+<div>
+<div class="text-sm font-bold">Iron &amp; Ember</div>
+<div class="text-[10px] text-tertiary font-bold uppercase">Smokehouse</div>
+</div>
+</div>
+</div>
+</div>
+<div class="editorial-gradient p-6 rounded-2xl text-white">
+<h4 class="font-headline font-bold text-lg mb-2">Refine Your Palate</h4>
+<p class="text-sm opacity-90 mb-4 leading-relaxed">Not feeling these? Teach Crimson Zest more about your preferences for sharper results.</p>
+<button class="bg-white/20 hover:bg-white/30 transition-colors w-full py-2 rounded-lg font-bold text-xs uppercase tracking-widest">Update Taste Profile</button>
+</div>
+</aside>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-zinc-100 dark:bg-zinc-900">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 space-y-4 md:space-y-0 max-w-screen-2xl mx-auto">
+<div class="font-lexend font-bold text-zinc-900 dark:text-zinc-50">Editorial Gastronomy</div>
+<div class="flex gap-8 font-plus-jakarta-sans text-sm">
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors" href="#">Privacy Policy</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors" href="#">Terms of Service</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors" href="#">Contact Support</a>
+</div>
+<div class="font-plus-jakarta-sans text-sm text-zinc-500 dark:text-zinc-400">
+                © 2024 Editorial Gastronomy. The Digital Maître D’ Experience.
+            </div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,30 @@
+{
+  "used_fallback": false,
+  "llm_model": "models/gemini-2.5-flash",
+  "prompt_version": "1",
+  "candidate_count": 2,
+  "total_after_filters": 18,
+  "error": null,
+  "recommendations": [
+    {
+      "rank": 1,
+      "restaurant_id": "bbc304ef8d3fe700",
+      "name": "Ruh's Cafe",
+      "location": "BTM",
+      "cuisine": "Cafe, American, Italian, Continental, Chinese",
+      "rating": 4.1,
+      "estimated_cost": "medium",
+      "explanation": "Ruh's Cafe is an excellent match, offering Italian cuisine in BTM with a medium cost_bucket and a high rating of 4.1, perfectly aligning with your preferences."
+    },
+    {
+      "rank": 2,
+      "restaurant_id": "f8dbb4c81eadcca7",
+      "name": "Whooppeezz",
+      "location": "BTM",
+      "cuisine": "Italian, Pizza",
+      "rating": 4.0,
+      "estimated_cost": "medium",
+      "explanation": "Whooppeezz is another great option, featuring Italian cuisine in BTM. It fits your medium budget and has a strong rating of 4.0."
+    }
+  ]
+}

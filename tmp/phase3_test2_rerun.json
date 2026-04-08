@@ -1,0 +1,40 @@
+{
+  "used_fallback": false,
+  "llm_model": "models/gemini-2.5-flash",
+  "prompt_version": "1",
+  "candidate_count": 3,
+  "total_after_filters": 15,
+  "error": null,
+  "recommendations": [
+    {
+      "rank": 1,
+      "restaurant_id": "e25306ce9624a509",
+      "name": "A2B - Adyar Ananda Bhavan",
+      "location": "HSR",
+      "cuisine": "South Indian, North Indian, Chinese, Street Food",
+      "rating": 4.2,
+      "estimated_cost": "low",
+      "explanation": "A2B - Adyar Ananda Bhavan is an excellent fit, located in HSR and offering Chinese cuisine. It boasts a high rating of 4.2 and perfectly aligns with your low budget."
+    },
+    {
+      "rank": 2,
+      "restaurant_id": "84e7a99eb83faf1b",
+      "name": "Shree Muthahalli Veg",
+      "location": "HSR",
+      "cuisine": "South Indian, North Indian, Chinese, Juices, Ice Cream",
+      "rating": 4.2,
+      "estimated_cost": "low",
+      "explanation": "Shree Muthahalli Veg is another great option in HSR, serving Chinese cuisine. It has a strong rating of 4.2 and fits your low budget perfectly."
+    },
+    {
+      "rank": 3,
+      "restaurant_id": "83f826783684bc53",
+      "name": "Sri Udupi Park",
+      "location": "HSR",
+      "cuisine": "South Indian, North Indian, Chinese, Beverages",
+      "rating": 4.0,
+      "estimated_cost": "low",
+      "explanation": "Sri Udupi Park is a suitable choice in HSR, offering Chinese cuisine. It has a rating of 4.0 and matches your low budget."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "used_fallback": true,
+  "llm_model": "gemini-1.5-flash",
+  "prompt_version": "1",
+  "candidate_count": 20,
+  "total_after_filters": 82,
+  "error": "404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+  "recommendations": [
+    {
+      "rank": 1,
+      "restaurant_id": "aaa8fd1063ad98cd",
+      "name": "Delhi Highway",
+      "location": "Indiranagar",
+      "cuisine": "North Indian",
+      "rating": 4.5,
+      "estimated_cost": "high",
+      "explanation": "Matched using your filters (location Indiranagar, cuisine signals, min rating, budget/cost). Rating 4.5/5; cost band high. Cuisine: North Indian."
+    },
+    {
+      "rank": 2,
+      "restaurant_id": "1e662bb2f97a6b1b",
+      "name": "Dhaba - Estd 1986 Delhi",
+      "location": "Indiranagar",
+      "cuisine": "North Indian",
+      "rating": 4.4,
+      "estimated_cost": "high",
+      "explanation": "Matched using your filters (location Indiranagar, cuisine signals, min rating, budget/cost). Rating 4.4/5; cost band high. Cuisine: North Indian."
+    },
+    {
+      "rank": 3,
+      "restaurant_id": "8d9423a7984484d3",
+      "name": "Meghana Foods",
+      "location": "Indiranagar",
+      "cuisine": "North Indian",
+      "rating": 4.2,
+      "estimated_cost": "high",
+      "explanation": "Matched using your filters (location Indiranagar, cuisine signals, min rating, budget/cost). Rating 4.2/5; cost band high. Cuisine: North Indian."
+    },
+    {
+      "rank": 4,
+      "restaurant_id": "a1dd715732dc3253",
+      "name": "Barbeque Nation",
+      "location": "Indiranagar",
+      "cuisine": "North Indian, European, Mediterranean, BBQ, Kebab",
+      "rating": 4.7,
+      "estimated_cost": "high",
+      "explanation": "Matched using your filters (location Indiranagar, cuisine signals, min rating, budget/cost). Rating 4.7/5; cost band high. Cuisine: North Indian, European, Mediterranean, BBQ, Kebab."
+    },
+    {
+      "rank": 5,
+      "restaurant_id": "d5b214f3e8113847",
+      "name": "1131 Bar + Kitchen",
+      "location": "Indiranagar",
+      "cuisine": "Continental, Asian, Italian, North Indian",
+      "rating": 4.6,
+      "estimated_cost": "high",
+      "explanation": "Matched using your filters (location Indiranagar, cuisine signals, min rating, budget/cost). Rating 4.6/5; cost band high. Cuisine: Continental, Asian, Italian, North Indian."
+    }
+  ]
+}

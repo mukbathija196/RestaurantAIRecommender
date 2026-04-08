@@ -1,0 +1,21 @@
+{
+  "columns": [
+    "restaurant_id",
+    "name",
+    "location",
+    "cuisine",
+    "rating",
+    "cost_bucket"
+  ],
+  "cost_bucket_thresholds": {
+    "q1": 300.0,
+    "q2": 550.0
+  },
+  "dataset": {
+    "name": "ManikaSaini/zomato-restaurant-recommendation",
+    "split": "train"
+  },
+  "notes": "Canonical contract: restaurant_id, name, location, cuisine, rating, cost_bucket",
+  "row_count": 51717,
+  "version": "1e7360d6dc6c"
+}

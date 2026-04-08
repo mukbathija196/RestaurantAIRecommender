@@ -1,0 +1,30 @@
+{
+  "used_fallback": true,
+  "llm_model": "gemini-1.5-flash",
+  "prompt_version": "1",
+  "candidate_count": 2,
+  "total_after_filters": 18,
+  "error": "404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+  "recommendations": [
+    {
+      "rank": 1,
+      "restaurant_id": "bbc304ef8d3fe700",
+      "name": "Ruh's Cafe",
+      "location": "BTM",
+      "cuisine": "Cafe, American, Italian, Continental, Chinese",
+      "rating": 4.1,
+      "estimated_cost": "medium",
+      "explanation": "Matched using your filters (location BTM, cuisine signals, min rating, budget/cost). Rating 4.1/5; cost band medium. Cuisine: Cafe, American, Italian, Continental, Chinese."
+    },
+    {
+      "rank": 2,
+      "restaurant_id": "f8dbb4c81eadcca7",
+      "name": "Whooppeezz",
+      "location": "BTM",
+      "cuisine": "Italian, Pizza",
+      "rating": 4.0,
+      "estimated_cost": "medium",
+      "explanation": "Matched using your filters (location BTM, cuisine signals, min rating, budget/cost). Rating 4.0/5; cost band medium. Cuisine: Italian, Pizza."
+    }
+  ]
+}

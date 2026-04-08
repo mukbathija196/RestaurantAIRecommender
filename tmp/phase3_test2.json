@@ -1,0 +1,40 @@
+{
+  "used_fallback": true,
+  "llm_model": "gemini-1.5-flash",
+  "prompt_version": "1",
+  "candidate_count": 3,
+  "total_after_filters": 15,
+  "error": "404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+  "recommendations": [
+    {
+      "rank": 1,
+      "restaurant_id": "e25306ce9624a509",
+      "name": "A2B - Adyar Ananda Bhavan",
+      "location": "HSR",
+      "cuisine": "South Indian, North Indian, Chinese, Street Food",
+      "rating": 4.2,
+      "estimated_cost": "low",
+      "explanation": "Matched using your filters (location HSR, cuisine signals, min rating, budget/cost). Rating 4.2/5; cost band low. Cuisine: South Indian, North Indian, Chinese, Street Food."
+    },
+    {
+      "rank": 2,
+      "restaurant_id": "84e7a99eb83faf1b",
+      "name": "Shree Muthahalli Veg",
+      "location": "HSR",
+      "cuisine": "South Indian, North Indian, Chinese, Juices, Ice Cream",
+      "rating": 4.2,
+      "estimated_cost": "low",
+      "explanation": "Matched using your filters (location HSR, cuisine signals, min rating, budget/cost). Rating 4.2/5; cost band low. Cuisine: South Indian, North Indian, Chinese, Juices, Ice Cream."
+    },
+    {
+      "rank": 3,
+      "restaurant_id": "83f826783684bc53",
+      "name": "Sri Udupi Park",
+      "location": "HSR",
+      "cuisine": "South Indian, North Indian, Chinese, Beverages",
+      "rating": 4.0,
+      "estimated_cost": "low",
+      "explanation": "Matched using your filters (location HSR, cuisine signals, min rating, budget/cost). Rating 4.0/5; cost band low. Cuisine: South Indian, North Indian, Chinese, Beverages."
+    }
+  ]
+}

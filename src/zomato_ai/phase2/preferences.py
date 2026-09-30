@@ -12,6 +12,10 @@ class UserPreferences(BaseModel):
     location: str = ""
     budget: Budget
     allowed_cost_buckets: Optional[List[Budget]] = None
+    # Cost-for-two range in INR. When set and the catalog has `cost_for_two`,
+    # Phase 2 filters on actual cost instead of the coarse cost buckets.
+    budget_min: Optional[float] = Field(None, ge=0.0)
+    budget_max: Optional[float] = Field(None, ge=0.0)
     cuisines: List[str] = Field(default_factory=list)
     min_rating: float = Field(0.0, ge=0.0, le=5.0)
     extra_preferences: List[str] = Field(default_factory=list)
@@ -22,6 +26,8 @@ class UserPreferencesNormalized(BaseModel):
     location_norm: Optional[str] = None
     budget: Budget
     allowed_cost_buckets: List[str]
+    budget_min: Optional[float] = None
+    budget_max: Optional[float] = None
     cuisines: List[str]
     cuisines_norm: List[str]
     min_rating: float
@@ -67,11 +73,17 @@ class PreferenceNormalizer:
             else cls._BUDGET_TO_COST_BUCKETS[prefs.budget]
         )
 
+        budget_min, budget_max = prefs.budget_min, prefs.budget_max
+        if budget_min is not None and budget_max is not None and budget_max < budget_min:
+            budget_min, budget_max = budget_max, budget_min
+
         return UserPreferencesNormalized(
             location=loc,
             location_norm=loc_norm,
             budget=prefs.budget,
             allowed_cost_buckets=allowed_buckets,
+            budget_min=budget_min,
+            budget_max=budget_max,
             cuisines=cuisines,
             cuisines_norm=cuisines_norm,
             min_rating=float(prefs.min_rating),

@@ -22,6 +22,7 @@ class RestaurantRecord(BaseModel):
     dish_liked: Optional[str] = None
     rating: float = Field(..., ge=0.0, le=5.0)
     cost_bucket: CostBucket
+    cost_for_two: Optional[float] = Field(None, ge=0.0)
 
 
 class PreprocessConfig(BaseModel):

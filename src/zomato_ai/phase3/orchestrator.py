@@ -13,7 +13,11 @@ from zomato_ai.phase3.gemini_client import GeminiGenerationConfig, GeminiLlmClie
 from zomato_ai.phase3.llm_output_parser import parse_json_object
 from zomato_ai.phase3.llm_output_validator import dataframe_by_id, validate_llm_payload
 from zomato_ai.phase3.prompt_builder import PromptBuilder
-from zomato_ai.phase3.prompt_contract import JSON_SYSTEM_INSTRUCTION, PROMPT_VERSION
+from zomato_ai.phase3.prompt_contract import (
+    JSON_SYSTEM_INSTRUCTION,
+    PROMPT_VERSION,
+    format_estimated_cost,
+)
 
 
 @dataclass(frozen=True)
@@ -190,7 +194,7 @@ def _merge_llm_payload(payload, candidates_df: pd.DataFrame, result_limit: int) 
             "cuisine": base.get("cuisine"),
             "dish_liked": base.get("dish_liked"),
             "rating": float(pd.to_numeric(base.get("rating"), errors="coerce") or 0.0),
-            "estimated_cost": base.get("cost_bucket"),
+            "estimated_cost": format_estimated_cost(base),
             "explanation": r.explanation,
         }
         out.append(row)
@@ -209,12 +213,12 @@ def _fallback_deterministic(candidates_df: pd.DataFrame, result_limit: int) -> L
         if name_key and name_key in seen_names:
             continue
         rating = float(pd.to_numeric(row.get("rating"), errors="coerce") or 0.0)
-        cost = str(row.get("cost_bucket", ""))
+        cost = format_estimated_cost(row) or ""
         cuisine = str(row.get("cuisine", ""))
         loc = str(row.get("location", ""))
         expl = (
             f"Matched using your filters (location {loc}, cuisine signals, min rating, budget/cost). "
-            f"Rating {rating:.1f}/5; cost band {cost}. Cuisine: {cuisine[:120]}."
+            f"Rating {rating:.1f}/5; cost {cost}. Cuisine: {cuisine[:120]}."
         )
         out.append(
             {
@@ -225,7 +229,7 @@ def _fallback_deterministic(candidates_df: pd.DataFrame, result_limit: int) -> L
                 "cuisine": row.get("cuisine"),
                 "dish_liked": row.get("dish_liked"),
                 "rating": rating,
-                "estimated_cost": row.get("cost_bucket"),
+                "estimated_cost": format_estimated_cost(row),
                 "explanation": expl,
             }
         )

@@ -23,6 +23,11 @@ This creates:
 - `data/processed/<version>/restaurants.parquet`
 - `data/processed/<version>/metadata.json`
 
+The artifact includes `cost_for_two` (INR), which the API uses to filter by the
+UI budget bands. Artifacts built before that column existed still work, but fall
+back to the coarse low/medium/high `cost_bucket`, so re-run this step to get
+accurate budget filtering.
+
 ### 3) Query the catalog (acceptance criteria)
 ```bash
 python scripts/query_catalog.py --location "BTM" --location-match exact --min-rating 4.0 --limit 10
@@ -90,7 +95,7 @@ PYTHONPATH=src uvicorn zomato_ai.phase4.app:app --reload --host 0.0.0.0 --port 8
 
 - **Web UI:** `http://127.0.0.1:8000/ui/` — form to test end-to-end
 - OpenAPI docs: `http://127.0.0.1:8000/docs`
-- `GET /ui/options` — UI data (`cities`, `localities_by_city`, cuisines ordered by popularity, `popular_cuisines` top-6, and budget bands in 1000-sized blocks up to 5000)
+- `GET /ui/options` — UI data (`cities`, `localities_by_city`, cuisines ordered by popularity, `popular_cuisines` top-6, and cost-for-two budget bands: under ₹300, ₹300–600, ₹600–1,000, ₹1,000–2,000, over ₹2,000)
 - `POST /recommendations` — body matches `RecommendRequest` in `src/zomato_ai/phase4/schemas.py`
 - `GET /health` — liveness
 - Optional env: `DATA_ARTIFACT_PATH` (explicit parquet/csv/jsonl path), `CORS_ORIGINS` (comma-separated or `*` for dev), `RECOMMENDATIONS_DRY_RUN=true` (Gemini fallback only; no key required)

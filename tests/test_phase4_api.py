@@ -14,6 +14,7 @@ from fastapi.testclient import TestClient
 
 from zomato_ai.phase1.catalog import RestaurantCatalog
 from zomato_ai.phase3.orchestrator import RecommendationOrchestrator
+from zomato_ai.phase3.prompt_contract import PROMPT_VERSION
 from zomato_ai.phase4.app import create_app
 
 
@@ -74,7 +75,7 @@ class TestPhase4Api(unittest.TestCase):
         self.assertEqual(data["recommendations"][0]["restaurant_id"], "r1")
         self.assertEqual(data["recommendations"][0]["dish_liked"], "Truffle pasta")
         self.assertIn("meta", data)
-        self.assertEqual(data["meta"]["prompt_version"], "3")
+        self.assertEqual(data["meta"]["prompt_version"], PROMPT_VERSION)
 
     def test_validation_error(self) -> None:
         res = self._test_client.post(
@@ -96,7 +97,7 @@ class TestPhase4Api(unittest.TestCase):
         self.assertIn("localities_by_city", data)
         self.assertIn("cuisines", data)
         self.assertIn("popular_cuisines", data)
-        self.assertIn("0-1000", data["budget_bands"])
+        self.assertIn("Under ₹300", data["budget_bands"])
 
     def test_any_locality_any_budget(self) -> None:
         res = self._test_client.post(

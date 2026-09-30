@@ -7,6 +7,7 @@ import pandas as pd
 
 from zomato_ai.phase2.preferences import UserPreferencesNormalized
 from zomato_ai.phase3.prompt_contract import (
+    cost_for_two_or_none,
     MAX_CANDIDATES_IN_PROMPT,
     MAX_CUISINE_LEN,
     MAX_NAME_LEN,
@@ -46,6 +47,7 @@ class PromptBuilder:
                     dish_liked=str(r.get("dish_liked", ""))[:200],
                     rating=float(pd.to_numeric(r.get("rating"), errors="coerce") or 0.0),
                     cost_bucket=str(r.get("cost_bucket", "")),
+                    cost_for_two=cost_for_two_or_none(r.get("cost_for_two")),
                 )
             )
 
@@ -56,7 +58,12 @@ class PromptBuilder:
         }
         if prefs.location_norm:
             user_preferences["location"] = prefs.location
-        if prefs.allowed_cost_buckets:
+        if prefs.budget_min is not None or prefs.budget_max is not None:
+            user_preferences["budget_for_two_inr"] = {
+                "min": prefs.budget_min,
+                "max": prefs.budget_max,
+            }
+        elif prefs.allowed_cost_buckets:
             user_preferences["budget"] = prefs.budget
 
         payload = {
@@ -91,7 +98,8 @@ class PromptBuilder:
             f"{json.dumps(schema, indent=2)}\n\n"
             "Ranking rules:\n"
             "- Prefer higher ratings when aligned with cuisine preferences.\n"
-            "- Respect cost_bucket alignment with the user's budget.\n"
+            "- Respect the user's budget: compare cost_for_two with budget_for_two_inr when given, "
+            "otherwise align cost_bucket with budget.\n"
             "- Prefer location match when relevant.\n"
             f"{extra}\n"
             "Input JSON:\n"

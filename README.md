@@ -53,7 +53,7 @@ python -m unittest discover -s tests -p "test_*.py" -v
 ### Configure Gemini
 1. Copy `.env.example` to `.env` in the project root.
 2. Set `GEMINI_API_KEY` from [Google AI Studio](https://aistudio.google.com/apikey).
-3. Optional: set `GEMINI_MODEL` (default: `gemini-1.5-flash`).
+3. Optional: set `GEMINI_MODEL` (default: `gemini-2.5-flash`).
 
 ### End-to-end recommendations (orchestrator)
 ```bash

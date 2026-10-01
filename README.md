@@ -126,7 +126,7 @@ in your host's environment.
 | Method | Path | Description |
 |---|---|---|
 | `GET` | `/health` | Liveness check. |
-| `GET` | `/ui/options` | Form data: `cities`, `localities_by_city`, `cuisines` ordered by popularity, the top-6 `popular_cuisines`, and `budget_bands`. |
+| `GET` | `/ui/options` | Form data: `cities`, `localities_by_city`, `cuisines` ordered by popularity, the top-6 `popular_cuisines`, and cost-for-two `budget_bands` (under ₹300, ₹300–600, ₹600–1,000, ₹1,000–2,000, over ₹2,000). |
 | `POST` | `/recommendations` | Ranked recommendations with AI explanations. The body is `RecommendRequest`. |
 | `GET` | `/ui/` | Lightweight static test page that calls `POST /recommendations` on the same origin. |
 | `GET` | `/docs` | OpenAPI (Swagger) docs. |
@@ -175,7 +175,10 @@ python scripts/recommend.py --dry-run --location "BTM" --budget medium \
 
 Activate the virtualenv first (`source .venv/bin/activate`).
 `preprocess_restaurants.py` writes `restaurants.parquet` and `metadata.json`
-into a new `data/processed/<version>/` folder.
+into a new `data/processed/<version>/` folder. The artifact includes
+`cost_for_two` (INR), which the API uses to filter by budget band. Artifacts
+built before that column existed still load, but fall back to the coarse
+low/medium/high `cost_bucket`, so re-run this step for accurate budget filtering.
 
 ## Tests
 

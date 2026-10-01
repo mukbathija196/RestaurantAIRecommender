@@ -54,6 +54,39 @@ def _load_budget_thresholds(path: str) -> Tuple[float, float]:
         return 500.0, 1500.0
 
 
+# Cost-for-two bands (INR) shown in the UI. Chosen to split the Bengaluru
+# Zomato data, where most restaurants sit between 200 and 1,000 for two.
+BUDGET_BANDS: Dict[str, Dict[str, Optional[float]]] = {
+    "Under ₹300": {"min": 0.0, "max": 300.0},
+    "₹300 – ₹600": {"min": 301.0, "max": 600.0},
+    "₹600 – ₹1,000": {"min": 601.0, "max": 1000.0},
+    "₹1,000 – ₹2,000": {"min": 1001.0, "max": 2000.0},
+    "Over ₹2,000": {"min": 2001.0, "max": None},
+}
+
+
+def _budget_label_from_range(
+    budget_min: Optional[float],
+    budget_max: Optional[float],
+    q1: float,
+    q2: float,
+) -> Optional[str]:
+    """Coarse low/medium/high label for a cost range, using its midpoint."""
+    if budget_min is None and budget_max is None:
+        return None
+    if budget_max is None:
+        ref = float(budget_min)
+    elif budget_min is None:
+        ref = float(budget_max) / 2.0
+    else:
+        ref = (float(budget_min) + float(budget_max)) / 2.0
+    if ref <= q1:
+        return "low"
+    if ref <= q2:
+        return "medium"
+    return "high"
+
+
 def _build_ui_options(df: pd.DataFrame, q1: float, q2: float) -> UiOptionsResponse:
     by_city: Dict[str, set] = {}
     for location in sorted(df["location"].dropna().astype(str).unique()):
@@ -76,13 +109,7 @@ def _build_ui_options(df: pd.DataFrame, q1: float, q2: float) -> UiOptionsRespon
         k for k, _ in sorted(cuisine_counts.items(), key=lambda kv: (-kv[1], kv[0]))
     ]
 
-    budget_bands: Dict[str, Dict[str, Optional[float]]] = {
-        "0-1000": {"min": 0.0, "max": 1000.0},
-        "1001-2000": {"min": 1001.0, "max": 2000.0},
-        "2001-3000": {"min": 2001.0, "max": 3000.0},
-        "3001-4000": {"min": 3001.0, "max": 4000.0},
-        "4001-5000": {"min": 4001.0, "max": 5000.0},
-    }
+    budget_bands: Dict[str, Dict[str, Optional[float]]] = dict(BUDGET_BANDS)
 
     return UiOptionsResponse(
         cities=cities,
@@ -212,7 +239,16 @@ def create_app(*, injected_orchestrator: Optional[RecommendationOrchestrator] = 
         orch: RecommendationOrchestrator = request.app.state.orchestrator
         location = (body.locality or body.location or "").strip()
 
-        selected_budget = body.budget or "medium"
+        selected_budget = (
+            body.budget
+            or _budget_label_from_range(
+                body.budget_min,
+                body.budget_max,
+                request.app.state.budget_q1,
+                request.app.state.budget_q2,
+            )
+            or "medium"
+        )
         budget_buckets = _budget_buckets_from_range(
             body.budget_min,
             body.budget_max,
@@ -223,6 +259,8 @@ def create_app(*, injected_orchestrator: Optional[RecommendationOrchestrator] = 
             location=location,
             budget=selected_budget,
             allowed_cost_buckets=budget_buckets,
+            budget_min=body.budget_min,
+            budget_max=body.budget_max,
             cuisines=body.cuisines,
             min_rating=body.min_rating,
             extra_preferences=body.extra_preferences,

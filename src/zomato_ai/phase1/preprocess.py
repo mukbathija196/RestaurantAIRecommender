@@ -43,6 +43,7 @@ def preprocess_to_artifact(
             "dish_liked": df["dish_liked"].apply(_dish_liked_to_string),
             "rating": df["rating"],
             "cost_bucket": df["cost_bucket"],
+            "cost_for_two": df["cost_for_two"],
         }
     )
 
@@ -71,7 +72,7 @@ def preprocess_to_artifact(
             "row_count": int(len(out)),
             "cost_bucket_thresholds": {"q1": q1, "q2": q2},
             "columns": list(out.columns),
-            "notes": "Canonical contract: restaurant_id, name, location, cuisine, dish_liked, rating, cost_bucket",
+            "notes": "Canonical contract: restaurant_id, name, location, cuisine, dish_liked, rating, cost_bucket, cost_for_two",
         },
     )
 
@@ -172,6 +173,8 @@ def _normalize_canonical_df(df: pd.DataFrame) -> pd.DataFrame:
     out["rating"] = out["rating"].fillna(0.0).clip(0.0, 5.0)
 
     out["cost_numeric"] = out["cost_raw"].apply(_normalize_cost_numeric)
+    # Actual cost for two (INR), left missing when the source has no value.
+    out["cost_for_two"] = out["cost_numeric"]
     out["cost_numeric"] = out["cost_numeric"].fillna(out["cost_numeric"].median())
     out["cost_numeric"] = out["cost_numeric"].fillna(0.0)
 

@@ -253,11 +253,7 @@
       var rangeEl = document.getElementById("budget_range");
       var b = (UI_OPTIONS && UI_OPTIONS.budget_bands) || {};
       var ranges = [{ value: "", label: "Any budget" }].concat(Object.keys(b).map(function (name) {
-        var x = b[name] || {};
-        var lo = x.min != null ? Math.round(x.min) : null;
-        var hi = x.max != null ? Math.round(x.max) : null;
-        var label = hi == null ? String(lo) + "+" : String(lo) + "-" + String(hi);
-        return { value: name, label: label };
+        return { value: name, label: name };
       }));
 
       rangeEl.innerHTML = "";

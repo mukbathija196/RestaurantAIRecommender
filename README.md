@@ -29,6 +29,25 @@ User preferences ──► Phase 2: deterministic filter + score ──► top 3
 | 4 | `src/zomato_ai/phase4` | FastAPI service exposing the recommender over HTTP, plus a lightweight test UI at `/ui/`. |
 | UI | `frontend/` | Two-page Next.js app: a preferences form (`/`) and personalised results (`/results`). |
 
+### Build status
+
+All four phases are implemented end to end:
+
+- **Phase 1:** foundation, dataset contract and catalog
+- **Phase 2:** preference model and deterministic filtering
+- **Phase 3:** Gemini LLM, prompt contract and orchestration. The code is split
+  into `prompt_contract`, `prompt_builder`, `gemini_client`,
+  `llm_output_parser`, `llm_output_validator` and `orchestrator`.
+- **Phase 4:** HTTP API, the lightweight `/ui/` test page, and the Next.js
+  frontend (based on the Stitch mockups in `design/`)
+
+### Canonical restaurant contract
+
+Every phase works on one normalised restaurant record, defined in
+[`src/zomato_ai/phase1/schema.py`](src/zomato_ai/phase1/schema.py) and
+described in
+[`docs/architecture/07-phase-wise-architecture.md`](docs/architecture/07-phase-wise-architecture.md).
+
 Design docs live in [`docs/architecture/`](docs/architecture/) (start with
 `00-architecture-overview.md`), and the original brief is in
 [`docs/problemstatement.md`](docs/problemstatement.md).
@@ -107,8 +126,10 @@ in your host's environment.
 | Method | Path | Description |
 |---|---|---|
 | `GET` | `/health` | Liveness check. |
-| `GET` | `/ui/options` | Cities, localities by city, cuisines (by popularity), popular cuisines and budget bands for the form. |
-| `POST` | `/recommendations` | Ranked recommendations with AI explanations. |
+| `GET` | `/ui/options` | Form data: `cities`, `localities_by_city`, `cuisines` ordered by popularity, the top-6 `popular_cuisines`, and `budget_bands`. |
+| `POST` | `/recommendations` | Ranked recommendations with AI explanations. The body is `RecommendRequest`. |
+| `GET` | `/ui/` | Lightweight static test page that calls `POST /recommendations` on the same origin. |
+| `GET` | `/docs` | OpenAPI (Swagger) docs. |
 
 Request and response models are in
 [`src/zomato_ai/phase4/schemas.py`](src/zomato_ai/phase4/schemas.py). Example:
@@ -143,10 +164,18 @@ python scripts/query_catalog.py --location "BTM" --location-match exact --min-ra
 python scripts/select_candidates.py --location "BTM" --budget medium --cuisine "Italian" \
   --min-rating 4.0 --location-match exact --top-k 10
 
-# Phase 3: end-to-end recommendations (add --dry-run to skip Gemini)
+# Phase 3: end-to-end recommendations (needs GEMINI_API_KEY in .env)
 python scripts/recommend.py --location "BTM" --budget medium --cuisine "Italian" \
   --min-rating 4.0 --location-match exact --limit 10
+
+# Phase 3: dry run with no API key (deterministic fallback only)
+python scripts/recommend.py --dry-run --location "BTM" --budget medium \
+  --min-rating 4.0 --location-match exact --limit 5
 ```
+
+Activate the virtualenv first (`source .venv/bin/activate`).
+`preprocess_restaurants.py` writes `restaurants.parquet` and `metadata.json`
+into a new `data/processed/<version>/` folder.
 
 ## Tests
 

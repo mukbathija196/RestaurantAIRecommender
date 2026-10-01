@@ -96,7 +96,7 @@ Use this as a baseline regardless of whether you choose FastAPI, Flask, Express,
 ```
 
 ## Implementation Notes (What to decide early)
-1. Gemini model choice for Phase 3 (for example, `gemini-1.5-flash` or equivalent current model).
+1. Gemini model choice for Phase 3 (for example, `gemini-2.5-flash` via the `google-genai` SDK, overridable with `GEMINI_MODEL`).
 2. `.env` handling for `GEMINI_API_KEY` (local development and deployment secrets management).
 3. Runtime framework (FastAPI recommended for Python, but architecture is portable).
 4. Preprocessing schema and cost bucket mapping strategy.

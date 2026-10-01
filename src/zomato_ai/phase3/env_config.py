@@ -27,5 +27,8 @@ def require_gemini_api_key() -> str:
     return key
 
 
+DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
+
+
 def get_gemini_model_name() -> str:
-    return os.getenv("GEMINI_MODEL", "gemini-1.5-flash").strip() or "gemini-1.5-flash"
+    return os.getenv("GEMINI_MODEL", DEFAULT_GEMINI_MODEL).strip() or DEFAULT_GEMINI_MODEL

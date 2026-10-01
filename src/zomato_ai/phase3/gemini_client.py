@@ -3,7 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
 from zomato_ai.phase3.env_config import get_gemini_model_name, require_gemini_api_key
 
@@ -18,7 +19,7 @@ class GeminiGenerationConfig:
 
 class GeminiLlmClient:
     """
-    Thin wrapper around google-generativeai for Phase 3.
+    Thin wrapper around the google-genai SDK for Phase 3.
     """
 
     def __init__(
@@ -26,33 +27,37 @@ class GeminiLlmClient:
         model_name: Optional[str] = None,
         api_key: Optional[str] = None,
         system_instruction: Optional[str] = None,
+        client: Optional[genai.Client] = None,
     ):
-        key = api_key or require_gemini_api_key()
-        genai.configure(api_key=key)
+        self._client = client or genai.Client(api_key=api_key or require_gemini_api_key())
         self._model_name = model_name or get_gemini_model_name()
-        kwargs = {}
-        if system_instruction:
-            kwargs["system_instruction"] = system_instruction
-        try:
-            self._model = genai.GenerativeModel(self._model_name, **kwargs)
-        except TypeError:
-            self._model = genai.GenerativeModel(self._model_name)
+        self._system_instruction = system_instruction
+
+    def _build_config(self, cfg: GeminiGenerationConfig, *, json_mode: bool) -> types.GenerateContentConfig:
+        return types.GenerateContentConfig(
+            temperature=cfg.temperature,
+            max_output_tokens=cfg.max_output_tokens,
+            system_instruction=self._system_instruction,
+            response_mime_type=cfg.response_mime_type if json_mode else None,
+        )
 
     def generate_text(self, prompt: str, config: Optional[GeminiGenerationConfig] = None) -> str:
         cfg = config or GeminiGenerationConfig()
-        gen_config: dict = {
-            "temperature": cfg.temperature,
-            "max_output_tokens": cfg.max_output_tokens,
-        }
-        if cfg.response_mime_type:
-            gen_config["response_mime_type"] = cfg.response_mime_type
+        json_mode = bool(cfg.response_mime_type)
 
         try:
-            response = self._model.generate_content(prompt, generation_config=gen_config)
+            response = self._client.models.generate_content(
+                model=self._model_name,
+                contents=prompt,
+                config=self._build_config(cfg, json_mode=json_mode),
+            )
         except Exception:
-            if cfg.response_mime_type:
-                gen_config.pop("response_mime_type", None)
-                response = self._model.generate_content(prompt, generation_config=gen_config)
+            if json_mode:
+                response = self._client.models.generate_content(
+                    model=self._model_name,
+                    contents=prompt,
+                    config=self._build_config(cfg, json_mode=False),
+                )
             else:
                 raise
 
@@ -60,6 +65,9 @@ class GeminiLlmClient:
         if text:
             return text
         if response.candidates:
-            parts = response.candidates[0].content.parts
-            return "".join(getattr(p, "text", "") for p in parts)
+            content = response.candidates[0].content
+            parts = (content.parts if content else None) or []
+            joined = "".join(getattr(p, "text", None) or "" for p in parts)
+            if joined:
+                return joined
         raise RuntimeError("Gemini returned no text (check safety filters or prompt).")

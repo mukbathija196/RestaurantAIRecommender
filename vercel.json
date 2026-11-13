@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60,
+      "includeFiles": "{src/**,data/processed/57175fee349f/**}"
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
+}

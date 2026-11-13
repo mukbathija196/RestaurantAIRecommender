@@ -78,7 +78,7 @@ design/             UI mockups the frontend is based on
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt  # runtime deps + dataset scripts
 cp .env.example .env   # then set GEMINI_API_KEY
 ```
 
@@ -188,16 +188,23 @@ The API tests use FastAPI's `TestClient`, which needs `httpx`
 
 ## Deployment
 
-The recommended setup is the frontend on **Vercel** and the backend on
-**Render** (or any host that runs a long-lived Python process). The backend's
-dependencies are too large for a Vercel Python function, and it loads the full
-catalog into memory at startup.
+Both halves can run on **Vercel** as two projects imported from this repo.
+`requirements.txt` holds only the API's runtime dependencies (the dataset
+tooling lives in `requirements-dev.txt`), which keeps the Python function small.
+
+- **Backend (Vercel):** import the repo with Root Directory `./`. `vercel.json`
+  routes every request to `api/index.py`, which pins `DATA_ARTIFACT_PATH` to
+  `data/processed/57175fee349f`. Set `GEMINI_API_KEY`, and once the frontend is
+  live, `CORS_ORIGINS` to its URL.
+- **Frontend (Vercel):** set the project's Root Directory to `frontend` and
+  `NEXT_PUBLIC_API_BASE_URL` to the backend URL (no trailing slash). Redeploy
+  after changing it, since it is baked in at build time.
+
+Alternatively, run the backend on **Render** (or any host that runs a
+long-lived Python process):
 
 - **Backend (Render web service):** build with `pip install -r requirements.txt`,
   start with `PYTHONPATH=src uvicorn zomato_ai.phase4.app:app --host 0.0.0.0 --port $PORT`.
   Set `GEMINI_API_KEY`, and pin `DATA_ARTIFACT_PATH` to a specific folder under
   `data/processed/` because a fresh clone gives every folder the same
   timestamp. Once the frontend is live, set `CORS_ORIGINS` to its URL.
-- **Frontend (Vercel):** set the project's Root Directory to `frontend` and
-  `NEXT_PUBLIC_API_BASE_URL` to the backend URL (no trailing slash). Redeploy
-  after changing it, since it is baked in at build time.

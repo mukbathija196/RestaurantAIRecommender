@@ -1,0 +1,4 @@
+# Extra dependencies for dataset ingestion / preprocessing scripts
+-r requirements.txt
+datasets>=2.19.0
+tqdm>=4.66.0

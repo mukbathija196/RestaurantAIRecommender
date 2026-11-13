@@ -6,3 +6,9 @@ tests
 scripts
 .venv
 data/processed/1e7360d6dc6c
+.hf_*
+.cache
+.claude
+.env
+.env.local
+.DS_Store

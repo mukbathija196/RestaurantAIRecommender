@@ -12,3 +12,6 @@ __pycache__/
 .hf_*/
 .cache/
 .hf_home/
+.vercel
+.env*
+!.env.example

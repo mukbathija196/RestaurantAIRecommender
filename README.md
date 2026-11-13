@@ -192,8 +192,8 @@ Both halves can run on **Vercel** as two projects imported from this repo.
 `requirements.txt` holds only the API's runtime dependencies (the dataset
 tooling lives in `requirements-dev.txt`), which keeps the Python function small.
 
-- **Backend (Vercel):** import the repo with Root Directory `./`. `vercel.json`
-  routes every request to `api/index.py`, which pins `DATA_ARTIFACT_PATH` to
+- **Backend (Vercel):** import the repo with Root Directory `./`. Vercel detects the
+  FastAPI app in `api/index.py` (dependencies come from `pyproject.toml`), which pins `DATA_ARTIFACT_PATH` to
   `data/processed/57175fee349f`. Set `GEMINI_API_KEY`, and once the frontend is
   live, `CORS_ORIGINS` to its URL.
 - **Frontend (Vercel):** set the project's Root Directory to `frontend` and
